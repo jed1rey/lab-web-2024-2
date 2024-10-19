@@ -15,7 +15,7 @@ const getAlunos = async (request, h) => {
 }
 
 const createAluno = async(request, h) => {
-    console.log(request.payload)
+    listaAlunos.push(request.payload)
     return request.payload;
 
 }
