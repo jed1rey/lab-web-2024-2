@@ -1,5 +1,6 @@
+const { optional } = require("joi");
 const alunoController = require("./controllers/aluno-controller");
-const Joi = require("joi");
+const alunoSchema = require("./controllers/aluno-schema");
 
 const routes = [
     {
@@ -13,7 +14,16 @@ const routes = [
         method: "GET",
         path: "/alunos",
         options: {
-            handler: alunoController.getAlunos
+            handler: alunoController.getAlunos,
+            validate: alunoSchema.consultarAlunos
+        }
+    },
+    {
+        method: "GET",
+        path: "/alunos/{id}",
+        options: {
+            handler: alunoController.alunoPorId,
+            validate: alunoSchema.consultaPorId
         }
     },
     {
@@ -21,21 +31,7 @@ const routes = [
         path: "/alunos",
         options: {
             handler: alunoController.createAluno,
-            validate: {
-                payload: Joi.object({
-                    nome: Joi
-                          .string()
-                          .min(2)
-                          .required(),
-                    idade: Joi
-                           .number()
-                           .integer()
-                           .positive()
-                           .max(150)
-                           .required(),
-                    email
-                })
-            }
+            validate: alunoSchema.createAluno
         }
     }
 ];
