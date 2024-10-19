@@ -14,4 +14,10 @@ const getAlunos = async (request, h) => {
     return listaAlunos;
 }
 
-module.exports = {getAlunos};
+const createAluno = async(request, h) => {
+    console.log(request.payload)
+    return request.payload;
+
+}
+
+module.exports = {getAlunos, createAluno};
