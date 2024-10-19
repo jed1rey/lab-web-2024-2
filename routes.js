@@ -1,5 +1,6 @@
-const Joi = require("joi");
 const alunoController = require("./controllers/aluno-controller");
+const alunoSchema = require("./controllers/aluno-schima")
+
 
 const routes = [
     {
@@ -13,34 +14,28 @@ const routes = [
         method: "GET",
         path: "/alunos",
         options: {
-            handler: alunoController.getAlunos
+            handler: alunoController.getAlunos,
+            validate: 
         }
     },
-{
-    method: "POST",
-    path: "/alunos",
-    options:{
-        handler: alunoController.createAluno,
-        validate:{
-            payload: Joi.object({
-                nome: Joi
-                    .string()
-                    .min(2)
-                    .required(), 
-                idade: Joi
-                    .number()
-                    .integer()
-                    .positive()
-                    .max(150)                    
-                    .required(),
-                email: Joi
-                    .string()
-                    .required()
+    {
+        method: "GET",
+        path: "/alunos/{id}",
+        options: {
+            handler: alunoController.alunoPorId,
+            validate: alunoSchema.consultaPorId
+        }
+    },
 
-            })
+    {
+        method: "POST",
+        path: "/alunos",
+        options: {
+            handler: alunoController.createAluno,
+            validate: alunoSchema.createAluno
+
         }
     }
-}
-];
+]
 
 module.exports = routes;
