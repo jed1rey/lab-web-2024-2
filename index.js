@@ -1,4 +1,4 @@
-const server = require("./server");
+const server = require("./config/server");
 
 (async () => {
     await server.start();

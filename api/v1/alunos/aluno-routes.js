@@ -1,17 +1,13 @@
 const alunoController = require("./aluno-controller");
 const alunoSchema = require("./aluno-schema");
 
+const baseVersion = '/v1';
+
 const routes = [
+   
     {
         method: "GET",
-        path: "/ping",
-        handler: (request, h) => {
-            return "pong";
-        }
-    },
-    {
-        method: "GET",
-        path: "/alunos",
+        path: `${baseVersion}/alunos`,
         options: {
             handler: alunoController.getAlunos,
             validate: alunoSchema.consultarAlunos
@@ -19,7 +15,7 @@ const routes = [
     },
     {
         method: "GET",
-        path: "/alunos/{id}",
+        path: `${baseVersion}/alunos{id}`,
         options: {
             handler: alunoController.alunoPorId,
             validate: alunoSchema.consultaPorId
@@ -27,7 +23,7 @@ const routes = [
     },
     {
         method: "POST",
-        path: "/alunos",
+        path: `${baseVersion}/alunos`,
         options: {
             handler: alunoController.createAluno,
             validate: alunoSchema.createAluno

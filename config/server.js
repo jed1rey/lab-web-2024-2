@@ -2,7 +2,7 @@ const Hapi = require("@hapi/hapi");
 const routes = require("./routes");
 
 const server = Hapi.server({
-    port: 5000,
+    port: 5001,
     host: "0.0.0.0"//localhost
 });
 
