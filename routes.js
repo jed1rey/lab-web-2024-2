@@ -1,39 +1,7 @@
-const { optional } = require("joi");
-const alunoController = require("./controllers/aluno-controller");
-const alunoSchema = require("./controllers/aluno-schema");
+const aluno = require('./controllers/aluno-routes');
 
 const routes = [
-    {
-        method: "GET",
-        path: "/ping",
-        handler: (request, h) => {
-            return "pong";
-        }
-    },
-    {
-        method: "GET",
-        path: "/alunos",
-        options: {
-            handler: alunoController.getAlunos,
-            validate: alunoSchema.consultarAlunos
-        }
-    },
-    {
-        method: "GET",
-        path: "/alunos/{id}",
-        options: {
-            handler: alunoController.alunoPorId,
-            validate: alunoSchema.consultaPorId
-        }
-    },
-    {
-        method: "POST",
-        path: "/alunos",
-        options: {
-            handler: alunoController.createAluno,
-            validate: alunoSchema.createAluno
-        }
-    }
-];
+    ...aluno
+]
 
 module.exports = routes;

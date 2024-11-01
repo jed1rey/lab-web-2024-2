@@ -53,6 +53,3 @@ Apresenta estrutura base para desenvolvimento de apis.
 ## Licença
 
 Este projeto está sob a licença ISC.
-```
-
-Basta copiar esse conteúdo para o arquivo `README.md` do seu projeto.
