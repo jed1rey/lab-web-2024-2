@@ -1,9 +1,11 @@
 const Hapi = require("@hapi/hapi");
-const routes = require("./routes");
+const routes = require("./config/routes");
+const config = require('./config/envs-config');
+
 
 const server = Hapi.server({
-    port: 5000,
-    host: "0.0.0.0"//localhost
+    port: config.port,
+    host: config.host
 });
 
 //apresenta as rotas http mapeadas ao hapi

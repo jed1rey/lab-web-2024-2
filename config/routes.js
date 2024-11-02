@@ -1,4 +1,4 @@
-const aluno = require('./controllers/aluno-routes');
+const aluno = require('../api/v1/alunos/aluno-routes');
 
 const routes = [
     ...aluno
