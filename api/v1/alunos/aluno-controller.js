@@ -1,18 +1,12 @@
 const listaAlunos = [];
 
+const alunoBusiness = require("./aluno-business");
+
 const getAlunos = async (request, h) => {
+    
+    const result = await alunoBusiness.list(request.query);
 
-    const {query} = request;
-
-    let resultado;
-    if(query.nome && query.idade) {
-        resultado = listaAlunos
-        .filter(aluno => aluno.nome == query.nome && aluno.idade == query.idade);
-    } else {
-        return listaAlunos;
-    }
-
-    return resultado;
+    return result;
 }
 
 const alunoPorId = async (request, h) => {
@@ -29,9 +23,10 @@ const alunoPorId = async (request, h) => {
 
 const createAluno = async (request, h) => {
     //save in memory
-    request.payload.id = Math.floor((Math.random() * 1000));
-    listaAlunos.push(request.payload);
-    return h.response(request.payload).code(201);
+    
+    const result = await alunoBusiness.save(request.payload);
+
+    return h.response(result).code(201);
 }
 
 module.exports = {getAlunos, createAluno, alunoPorId};
