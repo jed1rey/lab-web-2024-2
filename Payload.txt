@@ -1,0 +1,24 @@
+// payload base
+
+{
+"id": "12345",
+"nome": "Produto Exemplo",
+"descricao": "Uma breve descrição do produto.",
+"categoria": "Eletrônicos",
+"marca": "Marca Exemplo",
+"preco": 199.99,
+"quantidadeEstoque": 50,
+"codigoBarras": "7891234567890",
+"dimensoes": {
+"altura": 10.0,
+"largura": 20.0,
+"profundidade": 5.0,
+"unidadeMedida": "cm"
+},
+"peso": {
+"valor": 1.5,
+"unidadeMedida": "kg"
+},
+"status": "ativo",
+"dataCadastro": "2024-11-22T14:00:00Z"
+}
