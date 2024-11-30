@@ -7,7 +7,7 @@ const server = Hapi.server({
     host: config.host
 });
 
-// Registrar as rotas no servidor Hapi
+
 routes.forEach((route) => server.route(route));
 
 const start = async () => {
@@ -20,7 +20,7 @@ const start = async () => {
     }
 };
 
-// Iniciar o servidor
+
 start();
 
 module.exports = server;

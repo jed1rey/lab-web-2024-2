@@ -1,59 +1,130 @@
-const Joi = require('joi');
+const Joi = require("joi");
 
-// Schema para criar e atualizar um produto
-const produtoBase = Joi.object({
-    nome: Joi.string().min(3).max(100).required(),
-    descricao: Joi.string().min(10).max(500).optional(),
-    categoria: Joi.string().valid('Eletrônicos', 'Vestuário', 'Alimentos', 'Móveis', 'Livros').required(),
-    marca: Joi.string().min(2).max(50).required(),
-    preco: Joi.number().greater(0).required(),
-    quantidadeEstoque: Joi.number().integer().min(0).required(),
-    codigoBarras: Joi.string().length(13).pattern(/^\d+$/).required(),
-    dimensoes: Joi.object({
-        altura: Joi.number().greater(0).required(),
-        largura: Joi.number().greater(0).required(),
-        profundidade: Joi.number().greater(0).required(),
-        unidadeMedida: Joi.string().valid('cm', 'm', 'mm').required()
-    }).required(),
-    peso: Joi.object({
-        valor: Joi.number().greater(0).required(),
-        unidadeMedida: Joi.string().valid('kg', 'g').required()
-    }).required(),
-    status: Joi.string().valid('ativo', 'inativo').default('ativo'),
-    dataCadastro: Joi.date().iso().optional()
-});
-
-// Schema para criar um novo produto
 const createProduto = {
-    payload: produtoBase
-};
-
-// Schema para atualizar um produto
-const updateProduto = {
-    payload: produtoBase.keys({
-        id: Joi.string().required()  // ID obrigatório para a atualização
+    payload: Joi.object({
+        id: Joi
+            .string()
+            .required(),
+        nome: Joi
+            .string()
+            .min(2)
+            .required(),
+        descricao: Joi
+            .string()
+            .allow(null, ''),
+        categoria: Joi
+            .string()
+            .required(),
+        marca: Joi
+            .string()
+            .required(),
+        preco: Joi
+            .number()
+            .required(),
+        quantidadeEstoque: Joi
+            .number()
+            .integer()
+            .required(),
+        codigoBarras: Joi
+            .string()
+            .required(),
+        dimensoes: Joi
+            .object({
+                altura: Joi.number().required(),
+                largura: Joi.number().required(),
+                profundidade: Joi.number().required(),
+                unidadeMedida: Joi.string().required()
+            }),
+        peso: Joi
+            .object({
+                valor: Joi.number().required(),
+                unidadeMedida: Joi.string().required()
+            }),
+        status: Joi
+            .string()
+            .valid('ATIVO', 'INATIVO')
+            .required(),
+        dataCadastro: Joi
+            .date()
+            .required()
     })
 };
 
-// Schema para consulta por ID
+const updateProduto = {
+    payload: Joi.object({
+        nome: Joi
+            .string()
+            .min(2),
+        descricao: Joi
+            .string()
+            .allow(null, ''),
+        categoria: Joi
+            .string(),
+        marca: Joi
+            .string(),
+        preco: Joi
+            .number(),
+        quantidadeEstoque: Joi
+            .number()
+            .integer(),
+        codigoBarras: Joi
+            .string(),
+        dimensoes: Joi
+            .object({
+                altura: Joi.number(),
+                largura: Joi.number(),
+                profundidade: Joi.number(),
+                unidadeMedida: Joi.string()
+            }),
+        peso: Joi
+            .object({
+                valor: Joi.number(),
+                unidadeMedida: Joi.string()
+            }),
+        status: Joi
+            .string()
+            .valid('ATIVO', 'INATIVO'),
+        dataCadastro: Joi
+            .date()
+    }).min(1) // Garante que pelo menos um campo é enviado para atualizar
+};
+
+const deleteProduto = {
+    params: Joi.object({
+        id: Joi
+            .string()
+            .required()
+    })
+};
+
 const consultaPorId = {
     params: Joi.object({
-        id: Joi.string().required()
+        id: Joi
+            .string()
+            .required()
     })
 };
 
-// Schema para filtrar produtos
-const consultaProdutos = {
+const consultarProdutos = {
     query: Joi.object({
-        categoria: Joi.string().valid('Eletrônicos', 'Vestuário', 'Alimentos', 'Móveis', 'Livros').optional(),
-        nome: Joi.string().min(3).max(100).optional(),
-        status: Joi.string().valid('ativo', 'inativo').optional()
+        categoria: Joi
+            .string()
+            .optional(),
+        nome: Joi
+            .string()
+            .min(3)
+            .optional(),
+        status: Joi
+            .string()
+            .valid('ATIVO', 'INATIVO')
+            .default('ATIVO')
     })
 };
 
 module.exports = {
     createProduto,
     updateProduto,
+    deleteProduto,
     consultaPorId,
-    consultaProdutos
+    consultarProdutos
 };

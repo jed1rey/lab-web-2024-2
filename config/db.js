@@ -8,10 +8,15 @@ const sequelizeConfig = {
     logging: console.log
 };
 
-//database, usuario, senha
+
 const sequelize = new Sequelize(envConfig.database.name, 
                                 envConfig.database.user,
                                 envConfig.database.password, 
                                 sequelizeConfig);
+
+
+sequelize.authenticate()
+.then(() => console.log('Conexão concluida'))
+.catch(err => console.error('Erro:', err));
 
 module.exports = {sequelize};

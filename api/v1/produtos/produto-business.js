@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const produtoModel = require('./produto-model');
 
 const save = async (produto) => {

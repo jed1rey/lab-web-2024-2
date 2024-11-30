@@ -5,51 +5,66 @@ const Produto = database.sequelize.define('Produto', {
     id: {
         type: Sequelize.STRING,
         allowNull: false,
-        primaryKey: true
+        primaryKey: true,
+        field: 'id'
     },
     nome: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'nome'
     },
     descricao: {
         type: Sequelize.TEXT,
-        allowNull: true
+        allowNull: false,
+        field: 'descricao'
     },
     categoria: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'categoria'
     },
     marca: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        field: 'marca'
     },
     preco: {
-        type: Sequelize.FLOAT,
-        allowNull: false
+        type: Sequelize.DECIMAL(10, 2),
+        allowNull: false,
+        field: 'preco'
     },
     quantidadeEstoque: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        field: 'quantidade_estoque'
     },
     codigoBarras: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING(13),
+        allowNull: false,
+        field: 'codigo_barras'
     },
     dimensoes: {
         type: Sequelize.JSONB,
-        allowNull: true
+        allowNull: false,
+        field: 'dimensoes'
     },
     peso: {
         type: Sequelize.JSONB,
-        allowNull: true
+        allowNull: false,
+        field: 'peso'
     },
     status: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            isIn: [['ativo', 'inativo']]
+        },
+        field: 'status'
     },
     dataCadastro: {
         type: Sequelize.DATE,
-        allowNull: false
+        allowNull: false,
+        field: 'data_cadastro'
     }
 }, {
     tableName: 'produtos',
