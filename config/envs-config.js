@@ -1,17 +1,9 @@
-'use strict';
+// ./config/envs-config.js
+require('dotenv').config();
 
-const dotenv = require('dotenv').config();
-
-// All configurations will extend these options
-// ============================================
-const all = {
-    basePath: '/cms/v1',
-
-    env: process.env.ENVIRONMENT,
+const config = {
     host: process.env.HOST || '0.0.0.0',
-    port: process.env.PORT || 5000,
-
-
+    port: process.env.PORT || 3000,
     database: {
         host: process.env.DATABASE_HOST,
         port: process.env.DATABASE_PORT,
@@ -19,6 +11,6 @@ const all = {
         user: process.env.DATABASE_USER,
         password: process.env.DATABASE_PASSWORD
     }
-}
+};
 
-module.exports = all;
+module.exports = config;
