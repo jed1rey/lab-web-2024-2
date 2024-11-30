@@ -1,48 +1,59 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const { sequelize } = require('../../config/sequelize');
+const Sequelize = require('sequelize');
+const database = require('../../../config/db');
 
-const Produto = sequelize.define('Produto', {
-  id: {
-    type: DataTypes.STRING,
-    primaryKey: true,
-    allowNull: false
-  },
-  nome: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  descricao: DataTypes.STRING,
-  categoria: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  marca: DataTypes.STRING,
-  preco: {
-    type: DataTypes.FLOAT,
-    allowNull: false
-  },
-  quantidadeEstoque: DataTypes.INTEGER,
-  codigoBarras: {
-    type: DataTypes.STRING,
-    unique: true
-  },
-  dimensoes: {
-    type: DataTypes.JSON
-  },
-  peso: {
-    type: DataTypes.JSON
-  },
-  status: {
-    type: DataTypes.ENUM('ativo', 'inativo'),
-    defaultValue: 'ativo'
-  },
-  dataCadastro: {
-    type: DataTypes.DATE,
-    defaultValue: Sequelize.NOW
-  }
+const Produto = database.sequelize.define('Produto', {
+    id: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        primaryKey: true
+    },
+    nome: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    descricao: {
+        type: Sequelize.TEXT,
+        allowNull: true
+    },
+    categoria: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    marca: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    preco: {
+        type: Sequelize.FLOAT,
+        allowNull: false
+    },
+    quantidadeEstoque: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    codigoBarras: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    dimensoes: {
+        type: Sequelize.JSONB,
+        allowNull: true
+    },
+    peso: {
+        type: Sequelize.JSONB,
+        allowNull: true
+    },
+    status: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    dataCadastro: {
+        type: Sequelize.DATE,
+        allowNull: false
+    }
 }, {
-  tableName: 'produtos',
-  timestamps: false
+    tableName: 'produtos',
+    timestamps: false
 });
 
-module.exports = Produto;
+module.exports = { Produto };
